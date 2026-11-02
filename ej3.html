@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Volver a Home</a>
+        <h1>Ejercicio 3</h1>
+        <p>Instrucciones: Haz Clic Izquierdo para <strong>ocultar</strong> un parrafo. Haz Clic Derecho para <strong>eliminarlo</strong>.</p>
+        
+        <div id="contenedor-parrafos">
+            <p class="mi-parrafo">Parrafo 1: Haz click o click derecho sobre mi.</p>
+            <p class="mi-parrafo">Parrafo 2: Haz click o click derecho sobre mi.</p>
+            <p class="mi-parrafo">Parrafo 3: Haz click o click derecho sobre mi.</p>
+        </div>
+
+        <button id="btn-reaparecer">Reaparecer</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const parrafos = document.querySelectorAll('.mi-parrafo');
+            const btnReaparecer = document.getElementById('btn-reaparecer');
+
+            parrafos.forEach(p => {
+                p.addEventListener('click', () => {
+                    p.style.display = 'none';
+                });
+
+                p.addEventListener('contextmenu', (event) => {
+                    event.preventDefault();
+                    p.remove();
+                });
+            });
+
+            btnReaparecer.addEventListener('click', () => {
+                const parrafosRestantes = document.querySelectorAll('.mi-parrafo');
+                parrafosRestantes.forEach(p => {
+                    p.style.display = 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

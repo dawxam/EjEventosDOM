@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Volver a Home</a>
+        <h1>Ejercicio 2</h1>
+        
+        <p id="posicion">Mueve el raton sobre la pantalla</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const posicion = document.getElementById('posicion');
+
+            document.addEventListener('mousemove', (event) => {
+                const x = event.clientX;
+                const y = event.clientY;
+                posicion.textContent = `Posicion del raton: X = ${x}px, Y = ${y}px`;
+            });
+        });
+    </script>
+</body>
+</html>

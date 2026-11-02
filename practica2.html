@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Practica 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="imagen">
+        <a href="index.html" class="home-btn">&larr; Volver al Home</a>
+        
+        <form id="loginForm" novalidate>
+            <h2>Formulario de Registro</h2>
+
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                <span id="emailError"></span>
+            </div>
+
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+                <span id="passwordError"></span>
+            </div>
+
+            <button type="submit" id="submitBtn" disabled>Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const submitBtn = document.getElementById('submitBtn');
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            let isEmailValid = false;
+            let isPasswordValid = false;
+
+            function checkFormValidity() {
+                submitBtn.disabled = !(isEmailValid && isPasswordValid);
+            }
+
+            emailInput.addEventListener('focus', () => {
+                emailError.textContent = '';
+            });
+
+            emailInput.addEventListener('blur', () => {
+                const valor = emailInput.value.trim();
+                if (!emailRegex.test(valor)) {
+                    emailError.textContent = 'Formato no válido. Debe ser xxxx@yyyy.zzzz';
+                    isEmailValid = false;
+                } else {
+                    emailError.textContent = '';
+                    isEmailValid = true;
+                }
+                checkFormValidity();
+            });
+
+            passwordInput.addEventListener('focus', () => {
+                passwordError.textContent = '';
+            });
+
+            passwordInput.addEventListener('blur', () => {
+                const valor = passwordInput.value;
+                if (valor.length < 8 || valor.length > 10) {
+                    passwordError.textContent = 'La contraseña debe tener entre 8 y 10 caracteres';
+                    isPasswordValid = false;
+                } else {
+                    passwordError.textContent = '';
+                    isPasswordValid = true;
+                }
+                checkFormValidity();
+            });
+
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+                if (!isEmailValid || !isPasswordValid) {
+                    e.preventDefault();
+                } else {
+                    alert('Formulario enviado correctamente');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
